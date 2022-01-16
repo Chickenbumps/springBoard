@@ -22,6 +22,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     } else if (result == "delSuccess") {
         alert("게시글 삭제가 완료되었습니다.");
     }
+    $(document).ready(function () {
+        $("#writeBtn").click(function () {
+            location.href = "${path}/board/write"
+        });
+    });
+
 </script>
 
 <body class="hold-transition sidebar-mini">
@@ -75,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <c:forEach items="${list}" var="list">
                                     <tr>
                                         <td>${list.bno}</td>
-                                        <td><a href="${path}/board/read?bno=${list.bno}">${list}.title}</a></td>
+                                        <td><a href="${path}/board/read?bno=${list.bno}">${list.title}</a></td>
                                         <td>${list.author}</td>
                                         <td><fmt:formatDate value="${list.createdAt}" pattern="yyyy-MM-dd a HH:mm"/></td>
                                     </tr>

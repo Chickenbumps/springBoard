@@ -13,27 +13,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <%@ include file="../include/head.jsp"%>
-<script language="JavaScript">
-    console.log("111111111111");
-    $(document).ready(function () {
-        var formObj = $("form[role='form']");
-        console.log(formObj);
-        $("#updateBtn").click(function () {
-            console.log("mod");
-            formObj.attr("action", "${path}/board/update");
-            formObj.attr("method", "get");
-            formObj.submit();
-        });
-        $("#deleteBtn").click(function () {
-            console.log("delete");
-            formObj.attr("action", "${path}/board/delete");
-            formObj.submit();
-        });
-        $("#listBtn").click(function () {
-            console.log("list;");
-            self.location = "${path}/board/list" });
-    });
-</script>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
@@ -125,6 +104,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <%@include file="../include/main_footer.jsp"%>
 </div>
 <!-- ./wrapper -->
+<script language="JavaScript">
+    console.log("111111111111");
+    $(document).ready(function () {
+        var formObj = $("form[role='form']");
+        console.log(formObj);
+        $("#updateBtn").click(function () {
+            console.log("mod");
+            formObj.attr("action", "${path}/board/update");
+            formObj.attr("method", "get");
+            formObj.submit();
+        });
+        $("#deleteBtn").click(function () {
+            console.log("delete");
+            formObj.attr("action", "${path}/board/delete");
+            formObj.submit();
+        });
+        $("#listBtn").click(function () {
+            console.log("list;");
+            self.location = "${path}/board/list" });
+    });
+</script>
 </body>
 <%@ include file="../include/plugin_js.jsp"%>
 </html>
