@@ -4,7 +4,10 @@
     <insert id="register">
         INSERT INTO user_info(userId, userPw, userName, userEmail) values(#{userId},#{userPw},#{userName},#{userEmail})
     </insert>
-    <select id="login" resultMap="userVOResultMap">
+    <select id="login" resultType="com.board.demo.model.UserVO">
         SELECT * FROM user_info WHERE userId = #{userId}
+    </select>
+    <select id="checkUserSessionKey" resultType="com.board.demo.model.UserVO">
+        SELECT * FROM user_info WHERE sessionKey = #{value}
     </select>
 </mapper>

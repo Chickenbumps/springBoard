@@ -13,6 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <%@ include file="../include/head.jsp"%>
+<jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
@@ -62,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                             <div class="form-group">
                                 <label for="author">작성자</label>
-                                <input class="form-control" id="author" name="author">
+                                <input class="form-control" id="author" name="author" value="${login.userName}" readonly>
                             </div>
                         </div>
                             <div class="card-footer">

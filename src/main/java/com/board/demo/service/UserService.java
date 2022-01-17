@@ -6,6 +6,8 @@ import com.board.demo.model.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserService {
     @Autowired
@@ -17,5 +19,13 @@ public class UserService {
 
     public UserVO login(LoginDTO loginDTO) throws Exception {
         return dao.login(loginDTO);
+    }
+
+    public void keepLogin(String userId, String sessionId, Date sessionLimit) throws Exception{
+        dao.keepLogin(userId,sessionId,sessionLimit);
+    }
+
+    public UserVO checkUserSessionKey(String value) throws Exception {
+        return dao.checkUserSessionKey(value);
     }
 }

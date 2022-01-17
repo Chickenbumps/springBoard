@@ -11,9 +11,6 @@
     <%@ include file="../include/head.jsp" %>
     <body class="hold-transition login-page">
         <div class="login-box">
-            <div class="login-logo">
-                <a href="${path}/"><b>Admin</b>LTE</a>
-            </div> <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
@@ -57,7 +54,7 @@
         <%@ include file="../include/plugin_js.jsp" %>
         <script>
             var msg = "${msg}";
-            if (msg === "REGISTERED") {
+            if (msg === "registered") {
                 alert("회원가입이 완료되었습니다. 로그인해주세요~");
             } else if (msg == "FAILURE") {
                 alert("아이디와 비밀번호를 확인해주세요.");

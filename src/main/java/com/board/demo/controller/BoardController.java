@@ -43,6 +43,7 @@ public class BoardController {
     @RequestMapping(value = "/read",method=RequestMethod.GET)
     public String read(int bno, Model model) throws Exception {
         model.addAttribute("read",service.read(bno));
+
         return "/board/read";
     }
     // Update page

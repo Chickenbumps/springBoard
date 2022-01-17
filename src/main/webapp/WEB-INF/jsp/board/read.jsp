@@ -13,6 +13,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <%@ include file="../include/head.jsp"%>
+<%@ page import="com.board.demo.model.UserVO" %>
+<jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
@@ -34,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="${path}/board/list">Home</a></li>
                             <li class="breadcrumb-item active">Starter Page</li>
                         </ol>
                     </div><!-- /.col -->
@@ -72,14 +75,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <button id="listBtn" type="submit" class="btn btn-primary listBtn">
                                 <i class="fa fa-list"></i> 목록
                             </button>
-                            <div class="float-right">
-                                <button id="updateBtn" type="submit" class="btn btn-warning modBtn">
-                                    <i class="fa fa-edit"></i> 수정
-                                </button>
-                                <button id="deleteBtn" type="submit" class="btn btn-danger delBtn">
-                                    <i class="fa fa-trash"></i> 삭제
-                                </button>
-                            </div>
+                            <c:if test="${login.userName == read.author}">
+                                <div class="float-right">
+                                    <button id="updateBtn" type="submit" class="btn btn-warning modBtn">
+                                        <i class="fa fa-edit"></i> 수정
+                                    </button>
+                                    <button id="deleteBtn" type="submit" class="btn btn-danger delBtn">
+                                        <i class="fa fa-trash"></i> 삭제
+                                    </button>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -104,8 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <%@include file="../include/main_footer.jsp"%>
 </div>
 <!-- ./wrapper -->
-<script language="JavaScript">
-    console.log("111111111111");
+<script>
     $(document).ready(function () {
         var formObj = $("form[role='form']");
         console.log(formObj);
