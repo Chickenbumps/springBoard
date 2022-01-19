@@ -14,7 +14,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <%@ include file="../include/head.jsp"%>
 <jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini"><script>
+    $(document).ready(function() {
+        $("#submitBtn").click(function(){
+            event.preventDefault();
+            let tempTitle = $("#title").val();
+            console.log("title:",tempTitle);
+            console.log("content:",$("#content").val());
+            if($("#title").val() == ""){
+                alert("제목을 입력해주세요.");
+                document.getElementById("title").focus();
+            }else if($("#content").val() == ""){
+                alert("내용을 입력해주세요.");
+                // $('#title').val(tempTitle);
+                // console.log("temp2:",tempTitle);
+                document.getElementById("content").focus();
+            }else{
+                $.post("",{title:$("#title").val(),content:$("#content").val(),author:$("#author").val()},function (res) {
+                    console.log(res);
+                    if(res === "fail"){
+                        alert("글쓰기를 실패했습니다.");
+                    }else if(res === "success"){
+                        alert("게시글이 등록되었습니다.");
+                        location.href="/board/list";
+                    }
+
+                });
+            }
+        })
+    })
+</script>
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -72,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="float-right">
                                     <button type="reset" class="btn btn-warning">
                                         <i class="fa fa-reply"></i> 초기화</button>
-                                    <button type="submit" class="btn btn-success">
+                                    <button id="submitBtn" type="submit" class="btn btn-success">
                                         <i class="fa fa-save"></i> 저장</button>
                                 </div>
                             </div>

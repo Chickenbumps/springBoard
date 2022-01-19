@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -28,10 +30,17 @@ public class BoardController {
     }
     // Board write
     @RequestMapping(value ="/write",method = RequestMethod.POST)
-    public String writePOST(BoardVO boardVO, RedirectAttributes redirectAttributes) throws  Exception{
+    @ResponseBody
+    public String writePOST(BoardVO boardVO, RedirectAttributes redirectAttributes,@RequestParam(value= "title") String title, @RequestParam(value="content") String content, @RequestParam(value="author") String author) throws  Exception{
+        boardVO.setTitle(title);
+        boardVO.setContent(content);
+        boardVO.setAuthor(author);
+        if(boardVO.getTitle().equals("") || boardVO.getContent().equals("")){
+            return "fail";
+        }
         service.create(boardVO);
         redirectAttributes.addFlashAttribute("msg","regSuccess");
-        return "redirect:/board/list";
+        return "success";
     }
     // Board List page
     @RequestMapping(value = "/list", method = RequestMethod.GET)
