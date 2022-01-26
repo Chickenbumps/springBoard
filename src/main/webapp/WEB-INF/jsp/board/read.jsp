@@ -62,13 +62,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
         getReplies("${path}/replies/all/"+ bno);
         let loginUsername = "${login.userName}"
-
+        let tempRno = 0;
         function getReplies(repliesUri) {
             $.getJSON(repliesUri, function (data) {
                 printReplyCount(data.length);
                 let str = '';
                 let path = "${path}";
                 $(data).each(function (){
+                    tempRno = this.rno;
                     let formatDate = prettyDate(this.updatedAt);
                     str += "<div class='post replyDiv' data-rno='"+ this.rno +"'>"
                         +  "<div class='user-block'>"
@@ -86,18 +87,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         +  "</div>"
                         +  "<div class='oldContent'>"+ this.content + "</div>"
                         +  "<div class='form-row float-left rereplyDiv'>"
-                        +  "<a id='"+this.rno+"'" +"href='#rereplyCollapse"+this.rno +"'"+ "class='btn-box-tool rereplyShowBtn' data-toggle='collapse' >"+"댓글 달기" + "</a>"
+                        +  "<a id='"+this.rno+"'" +"href='#rereplyCollapse"+this.rno +"'"+ "class='btn-box-tool rereplyShowBtn' data-toggle='collapse' rno='"+this.rno +"'>"+"댓글 달기" + "</a>"
                         +  "</div>"
                         +  "<div class='collapse row' id='rereplyCollapse"+this.rno+"'"+">"
 
                         +  "<div class='col-7'>"
-                        +  "<input class='w-100 form-control rereplyInput' type='text' placeholder='댓글입력...'>"
+                        +  "<input class='w-100 form-control rereplyInput"+this.rno+"' type='text' placeholder='댓글입력...' rno='"+this.rno +"'>"
                         +  "</div>"
                         +  "<div class='col-3'>"
                         +  "<span class='username'>" + loginUsername + "</span>"
                         +  "</div>"
                         +  "<div class='col-3'>"
-                        +  "<button type='button' class='btn btn-success mb-1 rereplyAddBtn'>" + "답글 달기" +"</button>"
+                        +  "<button type='button' class='btn btn-success mb-1 rereplyAddBtn' rno='"+this.rno +"'>" + "답글 달기" +"</button>"
                         +  "</div>"
                         +  "</div>"
                         +  "<div class='rereplyDiv'>"
@@ -165,12 +166,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             })
         })
 
-        $("button.btn.btn-success.mb-1.rereplyAddBtn").click(function () {
+        $(document).on("click",".rereplyAddBtn",function () {
             console.log("READD BTN CLICKED.");
-            let replyContent = $(".rereplyInput");
+            let rno = $(this).attr('rno');
+            let contentInput = ".rereplyInput"+ rno;
+            console.log("V:",contentInput,$(contentInput).val());
+            let replyContent = $(contentInput);
             let authorValue = loginUsername;
             let contentValue = replyContent.val();
-            let rno = $(".rereplyShowBtn").attr('id');
+            console.log("content:",contentValue);
             $.ajax({
                 type:"post",
                 url:"${path}/replies/",
