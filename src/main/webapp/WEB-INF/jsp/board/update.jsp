@@ -12,8 +12,9 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+<%@ include file="../include/plugin_js.jsp"%>
 <%@ include file="../include/head.jsp"%>
-<script language="JavaScript">
+<script type="text/javascript">
     $(document).ready(function () {
         var formObj = $("form[role='form']");
         console.log(formObj);
@@ -119,6 +120,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 </body>
-<%@ include file="../include/plugin_js.jsp"%>
 </html>
 

@@ -6,9 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ include file="../include/plugin_js.jsp" %>
+<%@ include file="../include/head.jsp" %>
 <!DOCTYPE html>
 <html>
-<%@ include file="../include/head.jsp" %>
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="card">
@@ -79,8 +80,6 @@
     </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
-
-<%@ include file="../include/plugin_js.jsp" %>
 <script>
     $(function () {
         $('input').iCheck({

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.demo.dao.ReplyDAO">
+    <select id="replyList" resultType="ReplyVO">
+        SELECT rno,bno,parentrno,content,author,createdAt,updatedAt FROM board_reply WHERE bno = #{bno} ORDER BY rno
+    </select>
+    <insert id="replyInsert">
+        INSERT INTO board_reply(rno,bno,parentrno,content,author) VALUES(reply_seq.nextval,#{bno},#{parentrno},#{content},#{author})
+    </insert>
+    <update id="replyUpdate">
+        update board_reply SET content = #{content}, updatedAt = sysdate WHERE rno = #{rno}
+    </update>
+    <delete id="replyDelete">
+        DELETE FROM board_reply WHERE rno = #{rno}
+    </delete>
+
+</mapper>

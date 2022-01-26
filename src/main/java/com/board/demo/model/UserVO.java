@@ -9,6 +9,15 @@ public class UserVO {
     private String userEmail;
     private Date userJoinDate;
     private Date userLoginDate;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;

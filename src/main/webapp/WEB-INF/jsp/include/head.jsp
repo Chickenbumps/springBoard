@@ -21,14 +21,6 @@
     <link rel="stylesheet" href="${path}/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="${path}/dist/css/adminlte.min.css">
-    <!-- REQUIRED SCRIPTS -->
-
-    <!-- jQuery -->
-    <script src="${path}/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="${path}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="${path}/dist/js/adminlte.min.js"></script>
 </head>
 <body>
 

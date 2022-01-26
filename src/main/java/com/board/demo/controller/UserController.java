@@ -47,13 +47,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginPost",method = RequestMethod.POST)
-    public void loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+    public void loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model,HttpServletRequest request) throws Exception {
         UserVO userVO = service.login(loginDTO);
         if(userVO == null || !BCrypt.checkpw(loginDTO.getUserPw(), userVO.getUserPw())){
             return;
         }
         model.addAttribute("user",userVO);
-
+//        httpSession = request.getSession(true);
+//        System.out.println("userName:"+userVO.getUserName());
+//        httpSession.setAttribute("userName",userVO.getUserName());
         // 로그인 유지
         if(loginDTO.isUseCookie()){
             int limit = 60 * 60 * 24;

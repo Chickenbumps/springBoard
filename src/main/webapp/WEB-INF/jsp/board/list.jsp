@@ -12,6 +12,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+<%@ include file="../include/plugin_js.jsp"%>
 <%@ include file="../include/head.jsp"%>
 <script>
     var result = "${msg}";
@@ -22,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     } else if (result == "delSuccess") {
         alert("게시글 삭제가 완료되었습니다.");
     }
-    $(document).ready(function () {
+    $(function () {
         $("#writeBtn").click(function () {
             location.href = "${path}/board/write"
         });
@@ -120,6 +121,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 </body>
-<%@ include file="../include/plugin_js.jsp"%>
 </html>
 
