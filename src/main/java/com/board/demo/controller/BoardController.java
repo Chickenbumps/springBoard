@@ -31,10 +31,11 @@ public class BoardController {
     // Board write
     @RequestMapping(value ="/write",method = RequestMethod.POST)
     @ResponseBody
-    public String writePOST(BoardVO boardVO, RedirectAttributes redirectAttributes,@RequestParam(value= "title") String title, @RequestParam(value="content") String content, @RequestParam(value="author") String author) throws  Exception{
+    public String writePOST(BoardVO boardVO, RedirectAttributes redirectAttributes,@RequestParam(value= "title") String title, @RequestParam(value="content") String content, @RequestParam(value="author") String author, @RequestParam(value="userID") int userID) throws  Exception{
         boardVO.setTitle(title);
         boardVO.setContent(content);
         boardVO.setAuthor(author);
+        boardVO.setUserID(userID);
         if(boardVO.getTitle().equals("") || boardVO.getContent().equals("")){
             return "fail";
         }

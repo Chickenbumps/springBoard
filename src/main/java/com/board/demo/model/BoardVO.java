@@ -9,6 +9,15 @@ public class BoardVO {
     private String content;
     private String author;
     private Date createdAt;
+    private int userID;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public int getBno() {
         return bno;
