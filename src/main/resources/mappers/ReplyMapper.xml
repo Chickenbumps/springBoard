@@ -5,7 +5,7 @@
         SELECT rno,bno,parentrno,content,author,createdAt,updatedAt FROM board_reply WHERE bno = #{bno} ORDER BY rno
     </select>
     <insert id="replyInsert">
-        INSERT INTO board_reply(rno,bno,parentrno,content,author) VALUES(reply_seq.nextval,#{bno},#{parentrno},#{content},#{author})
+        INSERT INTO board_reply(rno,bno,parentRno,content,author) VALUES(reply_seq.nextval,#{bno},#{parentRno},#{content},#{author})
     </insert>
     <update id="replyUpdate">
         update board_reply SET content = #{content}, updatedAt = sysdate WHERE rno = #{rno}

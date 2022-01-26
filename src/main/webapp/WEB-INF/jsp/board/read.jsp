@@ -61,13 +61,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             return year + "-" + month + "-" + date + " "+ hours + ":" + minutes;
         }
         getReplies("${path}/replies/all/"+ bno);
+        let loginUsername = "${login.userName}"
 
         function getReplies(repliesUri) {
             $.getJSON(repliesUri, function (data) {
                 printReplyCount(data.length);
                 let str = '';
                 let path = "${path}";
-                let loginUsername = "${login.userName}"
                 $(data).each(function (){
                     let formatDate = prettyDate(this.updatedAt);
                     str += "<div class='post replyDiv' data-rno='"+ this.rno +"'>"
@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         +  "</div>"
                         +  "<div class='oldContent'>"+ this.content + "</div>"
                         +  "<div class='form-row float-left rereplyDiv'>"
-                        +  "<a href='#rereplyCollapse"+this.rno +"'"+ "class='btn-box-tool rereplyShowBtn' data-toggle='collapse' >"+"댓글 달기" + "</a>"
+                        +  "<a id='"+this.rno+"'" +"href='#rereplyCollapse"+this.rno +"'"+ "class='btn-box-tool rereplyShowBtn' data-toggle='collapse' >"+"댓글 달기" + "</a>"
                         +  "</div>"
                         +  "<div class='collapse row' id='rereplyCollapse"+this.rno+"'"+">"
 
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         +  "<span class='username'>" + loginUsername + "</span>"
                         +  "</div>"
                         +  "<div class='col-3'>"
-                        +  "<button type='button' class='btn btn-success mb-1 replyAddBtn'>" + "답글 달기" +"</button>"
+                        +  "<button type='button' class='btn btn-success mb-1 rereplyAddBtn'>" + "답글 달기" +"</button>"
                         +  "</div>"
                         +  "</div>"
                         +  "<div class='rereplyDiv'>"
@@ -136,11 +136,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
 
         $(".replyAddBtn").click(function () {
-            let replyAuthor = $("#inputAuthor");
+            console.log("ADD BTN CLICKED.");
             let replyContent = $("#inputContent");
-            let authorValue = replyAuthor.val();
+            let authorValue = loginUsername;
             let contentValue = replyContent.val();
-
             $.ajax({
                 type:"post",
                 url:"${path}/replies/",
@@ -152,14 +151,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 data: JSON.stringify({
                     bno:bno,
                     author:authorValue,
-                    content:contentValue
+                    content:contentValue,
+                    parentRno:0
                 }),
                 success: function(res){
                     if(res === "regSuccess"){
                         alert("댓글이 등록되었습니다.");
                         getReplies("${path}/replies/all/"+bno);
                         replyContent.val("");
-                        replyAuthor.val("");
+                        $('#replyTemplate').load(location.href+' #replyTemplate');
+                    }
+                }
+            })
+        })
+
+        $("button.btn.btn-success.mb-1.rereplyAddBtn").click(function () {
+            console.log("READD BTN CLICKED.");
+            let replyContent = $(".rereplyInput");
+            let authorValue = loginUsername;
+            let contentValue = replyContent.val();
+            let rno = $(".rereplyShowBtn").attr('id');
+            $.ajax({
+                type:"post",
+                url:"${path}/replies/",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "X-HTTP-Method-Override":"POST"
+                },
+                dataType: "text",
+                data: JSON.stringify({
+                    bno:bno,
+                    author:authorValue,
+                    content:contentValue,
+                    parentRno:rno
+                }),
+                success: function(res){
+                    if(res === "regSuccess"){
+                        alert("댓글이 등록되었습니다.");
+                        getReplies("${path}/replies/all/"+bno);
+                        replyContent.val("");
                         $('#replyTemplate').load(location.href+' #replyTemplate');
                     }
                 }
@@ -217,29 +247,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 }
             })
         })
-        $(".rereplyShowBtn").on("click",function (){
-            console.log("Show");
-            let str = '';
-            let username = "${login.userName}";
-            str += "<div class='card card-body'>"
-                +  "<form class='form-horizontal'>"
-                +  "<div class='row'>"
-                +  "<div class='form-group col-sm-8'>"
-                +  "<input class='form-control input-sm' id='rereplyContent' type='text' placeholder='댓글 입력...'>"
-                +  "</div>"
-                +  "<div class='form-group col-sm-2'>"
-                +  "<input class='form-control input-sm' id='rereplyAuthor' type='text' placeholder='작성자' value='"+ username +"' readonly>"
-                +  "</div>"
-                +  "<div class='form-group col-sm-2'>"
-                +  "<button type='button' class='btn btn-primary btn-sm btn-block replyAddBtn'>"
-                +  "<i class='fa fa-save'></i>"+ "등록"
-                +  "</button>"
-                +  "</div>"
-                +  "</div>"
-                +  "</form>"
-                +  "</div>";
-            $(".rereplyDiv").html(str);
-        })
+        <%--$(".rereplyShowBtn").on("click",function (){--%>
+        <%--    console.log("Show");--%>
+        <%--    let str = '';--%>
+        <%--    let username = "${login.userName}";--%>
+        <%--    str += "<div class='card card-body'>"--%>
+        <%--        +  "<form class='form-horizontal'>"--%>
+        <%--        +  "<div class='row'>"--%>
+        <%--        +  "<div class='form-group col-sm-8'>"--%>
+        <%--        +  "<input class='form-control input-sm' id='rereplyContent' type='text' placeholder='댓글 입력...'>"--%>
+        <%--        +  "</div>"--%>
+        <%--        +  "<div class='form-group col-sm-2'>"--%>
+        <%--        +  "<input class='form-control input-sm' id='rereplyAuthor' type='text' placeholder='작성자' value='"+ username +"' readonly>"--%>
+        <%--        +  "</div>"--%>
+        <%--        +  "<div class='form-group col-sm-2'>"--%>
+        <%--        +  "<button type='button' class='btn btn-primary btn-sm btn-block replyAddBtn'>"--%>
+        <%--        +  "<i class='fa fa-save'></i>"+ "등록"--%>
+        <%--        +  "</button>"--%>
+        <%--        +  "</div>"--%>
+        <%--        +  "</div>"--%>
+        <%--        +  "</form>"--%>
+        <%--        +  "</div>";--%>
+        <%--    $(".rereplyDiv").html(str);--%>
+        <%--})--%>
 
     });
 </script>

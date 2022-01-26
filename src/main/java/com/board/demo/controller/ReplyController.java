@@ -19,12 +19,9 @@ public class ReplyController {
 
     //  댓글 등록
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public ResponseEntity<Object> register(@RequestBody int parentRno,@RequestBody ReplyVO replyVO) {
+    public ResponseEntity<Object> register(@RequestBody ReplyVO replyVO) {
         ResponseEntity<Object> entity = null;
         try {
-            if(replyVO.getParentRno() != 0){
-                replyVO.setParentRno(parentRno);
-            }
             service.create(replyVO);
             entity = new ResponseEntity<>("regSuccess",HttpStatus.OK);
         }catch(Exception e){
