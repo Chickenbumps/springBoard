@@ -31,7 +31,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 // console.log("temp2:",tempTitle);
                 document.getElementById("content").focus();
             }else{
-                $.post("",{title:$("#title").val(),content:$("#content").val(),author:$("#author").val()},function (res) {
+                let userID = "${login.id}";
+                $.post("",{title:$("#title").val(),content:$("#content").val(),author:$("#author").val(),userID:userID},function (res) {
                     console.log(res);
                     if(res === "fail"){
                         alert("글쓰기를 실패했습니다.");

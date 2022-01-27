@@ -7,10 +7,35 @@ public class ReplyVO {
     private int bno;
     private int parentRno;
     private int depth;
+    private int userID;
     private String content;
     private String author;
     private Date createdAt;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     private Date updatedAt;
+
+    @Override
+    public String toString() {
+        return "ReplyVO{" +
+                "rno=" + rno +
+                ", bno=" + bno +
+                ", parentRno=" + parentRno +
+                ", depth=" + depth +
+                ", userID=" + userID +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 
     public int getParentRno() {
         return parentRno;

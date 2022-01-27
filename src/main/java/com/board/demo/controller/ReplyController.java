@@ -21,6 +21,7 @@ public class ReplyController {
     @RequestMapping(value = "",method = RequestMethod.POST)
     public ResponseEntity<Object> register(@RequestBody ReplyVO replyVO) {
         ResponseEntity<Object> entity = null;
+        System.out.println(replyVO.toString());
         try {
             service.create(replyVO);
             entity = new ResponseEntity<>("regSuccess",HttpStatus.OK);
