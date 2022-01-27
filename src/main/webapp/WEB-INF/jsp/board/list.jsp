@@ -73,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th style="width: 30px">#</th>
+                                    <th style="width: 30px">No.</th>
                                     <th>제목</th>
                                     <th style="width: 100px">작성자</th>
                                     <th style="width: 150px">작성시간</th>
