@@ -76,6 +76,7 @@ public class UserVO {
                 ", userEmail='" + userEmail + '\'' +
                 ", userJoinDate=" + userJoinDate +
                 ", userLoginDate=" + userLoginDate +
+                ", id=" + id +
                 '}';
     }
 }

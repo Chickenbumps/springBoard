@@ -5,7 +5,7 @@
         INSERT INTO user_info(userId, userPw, userName, userEmail,id) values(#{userId},#{userPw},#{userName},#{userEmail},user_seq.nextval)
     </insert>
     <select id="login" resultType="com.board.demo.model.UserVO">
-        SELECT * FROM user_info WHERE userId = #{userId}
+        SELECT * FROM user_info WHERE userId = #{username}
     </select>
     <select id="checkUserSessionKey" resultType="com.board.demo.model.UserVO">
         SELECT * FROM user_info WHERE sessionKey = #{value}

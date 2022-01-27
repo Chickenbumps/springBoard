@@ -1,24 +1,24 @@
 package com.board.demo.domain;
 
 public class LoginDTO {
-    private String userId;
-    private String userPw;
+    private String username;
+    private String password;
     private boolean useCookie;
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserPw() {
-        return userPw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isUseCookie() {
@@ -32,8 +32,8 @@ public class LoginDTO {
     @Override
     public String toString() {
         return "LoginDTO{" +
-                "userId='" + userId + '\'' +
-                ", userPw='" + userPw + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", useCookie=" + useCookie +
                 '}';
     }

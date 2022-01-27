@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.board.demo.model.UserVO" %><%--
   Created by IntelliJ IDEA.
   User: johaeseong
   Date: 1/15/22
@@ -15,11 +15,14 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>
 
+<%--<jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>--%>
 <body class="hold-transition sidebar-mini">
-<script>
+<%
+    UserVO userVO = (UserVO) session.getAttribute("login");
 
+%>
+<script>
     $(document).ready(function () {
         var formObj = $("form[role='form']");
         $("#updateBtn").click(function () {
@@ -61,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             return year + "-" + month + "-" + date + " "+ hours + ":" + minutes;
         }
         getReplies("${path}/replies/all/"+ bno);
-        let loginUsername = "${login.userName}"
+        let loginUsername = '<%=userVO.getUserName()%>'
 
         function getReplies(repliesUri) {
             $.getJSON(repliesUri, function (data) {
@@ -159,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             console.log("ADD BTN CLICKED.");
             let replyContent = $("#inputContent");
             let authorValue = loginUsername;
-            let userID = ${login.id};
+            let userID = '<%=userVO.getId()%>';
             let contentValue = replyContent.val();
             $.ajax({
                 type:"post",
@@ -195,7 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             console.log("V:",contentInput,$(contentInput).val());
             let authorValue = loginUsername;
             let contentValue = replyContent.val();
-            let userID = ${login.id};
+            let userID = '<%=userVO.getId()%>';
             $.ajax({
                 type:"post",
                 url:"${path}/replies/",
@@ -353,7 +356,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <button id="listBtn" type="submit" class="btn btn-primary listBtn">
                                 <i class="fa fa-list"></i> 목록
                             </button>
-                            <c:if test="${login.userName == read.author}">
+                            <%
+                                pageContext.setAttribute("userName",userVO.getUserName());
+                            %>
+                            <c:if test="${userName == read.author}">
                                 <div class="float-right">
                                     <button id="updateBtn" type="submit" class="btn btn-warning modBtn">
                                         <i class="fa fa-edit"></i> 수정
@@ -372,7 +378,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input class="form-control input-sm" id="inputContent" type="text" placeholder="댓글 입력...">
                                 </div>
                                 <div class="form-group col-sm-2">
-                                    <input class="form-control input-sm" id="inputAuthor" type="text" placeholder="작성자" value="${login.userName}" readonly>
+                                    <input class="form-control input-sm" id="inputAuthor" type="text" placeholder="작성자" value="<%=userVO.getUserName()%>>" readonly>
                                 </div>
                                 <div class="form-group col-sm-2">
                                     <button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn">
