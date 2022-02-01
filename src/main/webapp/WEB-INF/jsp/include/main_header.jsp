@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<c:set var="login" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -33,7 +33,7 @@
         <c:if test="${not empty login}">
             <li class="nav-item dropdown user user-menu dropleft">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="hidden-xs">${login.userName}</span>
+                    <span class="hidden-xs">${login.name}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="user-header">

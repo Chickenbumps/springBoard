@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                             <div class="form-group">
                                 <label for="author">작성자</label>
-                                <input class="form-control" id="author" name="author" value="${login.userName}" readonly>
+                                <input class="form-control" id="author" name="author" value="${login.name}" readonly>
                             </div>
                         </div>
                             <div class="card-footer">

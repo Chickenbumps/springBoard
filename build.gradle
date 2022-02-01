@@ -20,7 +20,7 @@ dependencies {
     implementation group: 'org.webjars', name: 'jquery', version: '3.3.1'
     implementation 'javax.servlet:jstl'
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
-//    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-starter-security"
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.3m'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'

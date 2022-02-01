@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="login" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -21,7 +23,7 @@
             <c:if test="${not empty login}">
                 <div class="info">
                     <%-- Status --%>
-                    <a href="#"><i class="d-block"></i> ${login.userName}</a>
+                    <a href="#"><i class="d-block"></i> ${login.name}</a>
                 </div>
             </c:if>
         </div>

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.demo.dao.UserDAO">
     <insert id="register">
-        INSERT INTO user_info(userId, userPw, userName, userEmail,id) values(#{userId},#{userPw},#{userName},#{userEmail},user_seq.nextval)
+        INSERT INTO user_info(username, password, name, userEmail,id) values(#{username},#{password},#{name},#{userEmail},user_seq.nextval)
     </insert>
     <select id="login" resultType="com.board.demo.model.UserVO">
-        SELECT * FROM user_info WHERE userId = #{username}
+        SELECT * FROM user_info WHERE username = #{username}
     </select>
     <select id="checkUserSessionKey" resultType="com.board.demo.model.UserVO">
         SELECT * FROM user_info WHERE sessionKey = #{value}
