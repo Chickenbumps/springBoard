@@ -1,4 +1,8 @@
 <%@ page import="com.board.demo.model.UserVO" %>
+<<<<<<< HEAD
+=======
+<%@ page import="org.springframework.security.core.parameters.P" %>
+>>>>>>> 4014b449b8b7aff3c0a2e8a45cb2ca097bfbb999
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -13,13 +17,24 @@
 <head>
     <title>Title</title>
 </head>
+<%
+    UserVO userVO = (UserVO) session.getAttribute("user");
+    if(userVO != null){
+
+    }
+%>
 <body>
 <%
 
 %>
     <script type="text/javascript">
-        alert("아이디와 비밀번호를 확인해주세요.");
-        location.href = "${path}/user/login";
+        let username = "<%=session.getAttribute("user")%>";
+        if(username){
+            location.href = "${path}/board/list";
+        }else{
+            alert("아이디와 비밀번호를 확인해주세요.");
+            location.href = "${path}/user/login";
+        }
     </script>
 </body>
 </html>

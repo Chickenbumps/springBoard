@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.board.demo.model.UserVO" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %><%--
   Created by IntelliJ IDEA.
   User: johaeseong
   Date: 1/15/22
@@ -14,6 +15,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <%@ include file="../include/plugin_js.jsp"%>
 <%@ include file="../include/head.jsp"%>
+
+<%
+    UserVO userVO = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+%>
 <script>
     var result = "${msg}";
     if(result == "regSuccess") {

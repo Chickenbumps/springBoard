@@ -18,7 +18,7 @@
 
             <form action="${path}/user/register" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" name="userId" class="form-control" placeholder="아아디">
+                    <input type="text" name="username" class="form-control" placeholder="아아디">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-exclamation"></span>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="text" name="userName" class="form-control" placeholder="이름">
+                    <input type="text" name="name" class="form-control" placeholder="이름">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" name="userPw" class="form-control" placeholder="비밀번호">
+                    <input type="password" name="password" class="form-control" placeholder="비밀번호">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

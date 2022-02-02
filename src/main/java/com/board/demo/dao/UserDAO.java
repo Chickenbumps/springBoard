@@ -19,14 +19,14 @@ public class UserDAO {
         sqlSession.insert("register",userVO);
     }
 
-    public UserVO login(LoginDTO loginDTO) throws Exception{
-        return sqlSession.selectOne("login",loginDTO);
+    public UserVO login(String username) throws Exception{
+        return sqlSession.selectOne("login",username);
     }
 
     // 로그인 유지
-    public void keepLogin(String userId, String sessionId, Date sessionLimit) throws Exception {
+    public void keepLogin(String username, String sessionId, Date sessionLimit) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId",userId);
+        map.put("username",username);
         map.put("sessionId",sessionId);
         map.put("sessionLimit",sessionLimit);
 

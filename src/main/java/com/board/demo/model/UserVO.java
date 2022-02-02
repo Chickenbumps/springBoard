@@ -1,15 +1,85 @@
 package com.board.demo.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class UserVO {
-    private String userId;
-    private String userPw;
-    private String userName;
+public class UserVO implements UserDetails {
+    private String username;
+    private String password;
+    private String name;
     private String userEmail;
     private Date userJoinDate;
     private Date userLoginDate;
     private int id;
+    private int isEnabled;
+    private String authority;
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIsEnabled(int isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
+    // 해당 유저의 권한을 리턴
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority(this.authority));
+        return auth;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public int getId() {
         return id;
@@ -17,30 +87,6 @@ public class UserVO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserPw() {
-        return userPw;
-    }
-
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getUserEmail() {
@@ -67,16 +113,19 @@ public class UserVO {
         this.userLoginDate = userLoginDate;
     }
 
+
     @Override
     public String toString() {
         return "UserVO{" +
-                "userId='" + userId + '\'' +
-                ", userPw='" + userPw + '\'' +
-                ", userName='" + userName + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userJoinDate=" + userJoinDate +
                 ", userLoginDate=" + userLoginDate +
                 ", id=" + id +
+                ", isEnabled=" + isEnabled +
+                ", authority='" + authority + '\'' +
                 '}';
     }
 }

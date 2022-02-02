@@ -1,4 +1,6 @@
-<%@ page import="com.board.demo.model.UserVO" %><%--
+<%@ page import="com.board.demo.model.UserVO" %>
+<%@ page import="org.springframework.security.core.context.SecurityContext" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %><%--
   Created by IntelliJ IDEA.
   User: johaeseong
   Date: 1/15/22
@@ -19,8 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <%--<jsp:useBean id="login" scope="session" type="com.board.demo.model.UserVO"/>--%>
 <body class="hold-transition sidebar-mini">
 <%
-    UserVO userVO = (UserVO) session.getAttribute("login");
-
+    UserVO userVO = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 %>
 <script>
     $(document).ready(function () {
@@ -64,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             return year + "-" + month + "-" + date + " "+ hours + ":" + minutes;
         }
         getReplies("${path}/replies/all/"+ bno);
-        let loginUsername = '<%=userVO.getUserName()%>'
+        let loginUsername = '<%=userVO.getName()%>'
 
         function getReplies(repliesUri) {
             $.getJSON(repliesUri, function (data) {
@@ -357,7 +358,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="fa fa-list"></i> 목록
                             </button>
                             <%
-                                pageContext.setAttribute("userName",userVO.getUserName());
+                                pageContext.setAttribute("name",userVO.getName());
                             %>
                             <c:if test="${userName == read.author}">
                                 <div class="float-right">
@@ -378,7 +379,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <input class="form-control input-sm" id="inputContent" type="text" placeholder="댓글 입력...">
                                 </div>
                                 <div class="form-group col-sm-2">
-                                    <input class="form-control input-sm" id="inputAuthor" type="text" placeholder="작성자" value="<%=userVO.getUserName()%>>" readonly>
+                                    <input class="form-control input-sm" id="inputAuthor" type="text" placeholder="작성자" value="<%=userVO.getName()%>" readonly>
                                 </div>
                                 <div class="form-group col-sm-2">
                                     <button type="button" class="btn btn-primary btn-sm btn-block replyAddBtn">
