@@ -11,26 +11,21 @@
 <!DOCTYPE html>
 <html>
 <script>
-    var msg = "${msg}";
+    let msg = "${msg}";
+    let loginFailMsg = "${loginFailMsg}";
+    console.log("loginFailMsg:",loginFailMsg);
     if (msg === "registered") {
         alert("회원가입이 완료되었습니다. 로그인해주세요~");
-    } else if (msg == "FAILURE") {
-        alert("아이디와 비밀번호를 확인해주세요.");
+    }else if(loginFailMsg != ""){
+        alert(loginFailMsg);
     }
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-blue',
-            radioClass: 'iradio_square',
-            increaseArea: '20%'
-        });
-    });
 </script>
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
-                    <form action="${path}/user/loginPost" method="post">
+                    <form action="${path}/user/login" method="post">
                         <div class="input-group mb-3">
                             <input type="text" name="username" class="form-control" placeholder="아이디">
                             <div class="input-group-append">

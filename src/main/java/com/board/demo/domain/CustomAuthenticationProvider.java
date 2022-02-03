@@ -20,14 +20,18 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException  {
+
         Collection<? extends SimpleGrantedAuthority> authorities;
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
         UserVO userVO = (UserVO) userService.loadUserByUsername(username);
+        if(userVO == null){
+            return null;
+        }
         authorities = (Collection<? extends SimpleGrantedAuthority>) userVO.getAuthorities();
-        System.out.println("Authority:"+ authorities);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println("password:"+bCryptPasswordEncoder.matches(password,userVO.getPassword()));
         if(!bCryptPasswordEncoder.matches(password,userVO.getPassword())){
             throw  new BadCredentialsException("잘못된 비밀번호 입니다.");
         }

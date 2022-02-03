@@ -1,9 +1,12 @@
 package com.board.demo;
 
+import com.board.demo.domain.CustomAuthenticationFailureHandler;
+import com.board.demo.domain.CustomAuthenticationProvider;
 import com.board.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -42,12 +45,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/user/login")
-                .loginProcessingUrl("/user/loginPost")
+                .loginProcessingUrl("/user/login")
                 .defaultSuccessUrl("/board/list")
+                .failureHandler(customAuthenticationFailureHandler())
+                .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/user/logout")
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/user/login");
+                .logoutSuccessUrl("/user/login")
+                .and()
+                .authenticationProvider(authenticationProvider());
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        return new CustomAuthenticationProvider();
+    }
+
+    @Bean
+    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 }

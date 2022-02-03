@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
@@ -44,12 +46,13 @@ public class UserController {
         return "redirect:/user/login";
     }
 
-    @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String loginGET() throws Exception {
+    @RequestMapping(value="/login")
+    public String login() throws Exception {
         return "/user/login";
     }
 
-//    @RequestMapping(value = "/loginPost",method = RequestMethod.POST)
+//    @ResponseBody
+//    @RequestMapping(value = "/loginPost")
 //    public void loginPost(String username, HttpSession httpSession, Model model,HttpServletRequest request) throws Exception {
 //        UserVO userVO = service.login(username);
 //        UserVO loadedUser = (UserVO) service.loadUserByUsername(username);
@@ -59,12 +62,12 @@ public class UserController {
 //        }
 //        model.addAttribute("user",userVO);
 //
-//        // 로그인 유지
-//        if(loadedUser.isUseCookie()){
-//            int limit = 60 * 60 * 24;
-//            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * limit));
-//            service.keepLogin(userVO.getUsername(),httpSession.getId(),sessionLimit);
-//        }
+//////         로그인 유지
+////        if(loadedUser.isUseCookie()){
+////            int limit = 60 * 60 * 24;
+////            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * limit));
+////            service.keepLogin(userVO.getUsername(),httpSession.getId(),sessionLimit);
+////        }
 //    }
 
 //    @RequestMapping(value = "/logout",method = RequestMethod.GET)

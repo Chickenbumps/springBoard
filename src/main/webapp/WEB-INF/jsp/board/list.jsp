@@ -82,7 +82,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <th>제목</th>
                                     <th style="width: 100px">작성자</th>
                                     <th style="width: 150px">작성시간</th>
-                                    <th style="width: 60px">조회</th>
                                 </tr>
                                 <c:forEach items="${list}" var="list">
                                     <tr>

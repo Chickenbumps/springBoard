@@ -21,17 +21,9 @@
 <head>
     <title>Title</title>
 </head>
-<%
-    UserVO userVO = (UserVO) session.getAttribute("user");
-    if(userVO != null){
-
-    }
-%>
 <body>
-<%
-
-%>
     <script type="text/javascript">
+        console.log("LOGINPOST");
         let username = "<%=session.getAttribute("user")%>";
         if(username){
             location.href = "${path}/board/list";
